@@ -1,0 +1,85 @@
+public class circularQueue {
+    private int[] queue;
+    private int front;
+    private int rear;
+    private int size;
+    private int capacity;
+
+    public circularQueue(int capacity) {
+        this.capacity = capacity;
+        queue = new int[capacity];
+        front = 0;
+        rear = -1;
+        size = 0;
+    }
+
+    public void enqueue(int item) {
+        if (isFull()) {
+            System.out.println("Queue is full. Cannot enqueue.");
+            return;
+        }
+        rear = (rear + 1) % capacity;
+        queue[rear] = item;
+        size++;
+    }
+
+    public int dequeue() {
+        if (isEmpty()) {
+            System.out.println("Queue is empty. Cannot dequeue.");
+            return -1;
+        }
+        int item = queue[front];
+        front = (front + 1) % capacity;
+        size--;
+        return item;
+    }
+
+    public int peek() {
+        if (isEmpty()) {
+            System.out.println("Queue is empty. Cannot peek.");
+            return -1;
+        }
+        return queue[front];
+    }
+
+    public boolean isEmpty() {
+        return size == 0;
+    }
+
+    public boolean isFull() {
+        return size == capacity;
+    }
+
+    public int size() {
+        return size;
+    }
+
+    public void display() {
+        if (isEmpty()) {
+            System.out.println("Queue is empty.");
+            return;
+        }
+        int count = 0;
+        int index = front;
+        while (count < size) {
+            System.out.print(queue[index] + " ");
+            index = (index + 1) % capacity;
+            count++;
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        circularQueue queue = new circularQueue(5);
+        queue.enqueue(44);
+        queue.enqueue(77);
+        queue.enqueue(12);
+        queue.enqueue(21);
+        queue.enqueue(45);
+        queue.display(); 
+        System.out.println("Dequeue: " + queue.dequeue()); 
+        queue.enqueue(76);
+        queue.display(); 
+        System.out.println("Peek: " + queue.peek());
+  }
+}
