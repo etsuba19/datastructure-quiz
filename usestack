@@ -1,0 +1,51 @@
+import java.util.Stack;
+class usestack {
+    private Stack<Integer> stack1; 
+    private Stack<Integer> stack2; 
+
+    public usestack() {
+        stack1 = new Stack<>();
+        stack2 = new Stack<>();
+    }
+    public void enqueue(int item) {
+        stack1.push(item);
+    }
+    public int dequeue() {
+        if (isEmpty())
+            System.out.println("Queue is empty");
+
+        if (stack2.isEmpty()) {
+            while (!stack1.isEmpty()) {
+                stack2.push(stack1.pop());
+            }
+        }
+        return stack2.pop();
+    }
+
+    public int peek() {
+        if (isEmpty())
+            System.out.println("Queue is empty");
+
+        if (stack2.isEmpty()) {
+            while (!stack1.isEmpty()) {
+                stack2.push(stack1.pop());
+            }
+        }
+        return stack2.peek();
+    }
+    public boolean isEmpty() {
+        return stack1.isEmpty() && stack2.isEmpty();
+    }
+    public int size() {
+        return stack1.size() + stack2.size();
+    }
+    public static void main(String[] args) {
+        usestack queue = new usestack();
+        queue.enqueue(12);
+        queue.enqueue(23);
+        queue.enqueue(31);
+        System.out.println("Dequeued element: " + queue.dequeue());
+        System.out.println("Peeked element: " + queue.peek());
+        System.out.println("Size of queue: " + queue.size());
+    }
+}
