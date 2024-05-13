@@ -1,0 +1,49 @@
+package question3;
+
+public class QueueStack {
+    int rear=-1;
+    int front=-1;
+    int size=5;
+    int[] array = new int[size];
+
+    public static void main(String[] args) {
+        QueueStack queue = new QueueStack();
+        queue.Enqueue(25);
+        queue.Enqueue(37);
+        queue.Enqueue(34);
+        queue.display();
+        System.out.println("the removed item is "+queue.Dequeue());
+        queue.display();
+        System.out.println("the peek is "+queue.peek());
+    }
+    void Enqueue(int data) {
+        if(isFull()) {System.out.println("The queue is full");}
+        else if (isEmpty()) {
+            front=rear=0;
+        }
+        array[rear++]=data;
+    }
+    int Dequeue(){
+        int element = array[front];
+        if(isEmpty()) { System.out.println("The queue is empty");}
+        else if (front == rear) {
+            rear--;
+            return array[front++];
+        }
+        array[front] = 0;
+        front++;
+        return element;
+    }
+    int peek() {
+        if (isEmpty()) return -1;
+        return array[front];}
+    boolean isEmpty() {return front == -1;}
+    boolean isFull(){ return rear == size-1;}
+
+    void display() {
+        for (int i: array) {
+            System.out.println(i);
+        }
+    }
+}
+
