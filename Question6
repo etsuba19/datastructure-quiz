@@ -1,0 +1,14 @@
+package question6;
+
+public class Deleteval {
+    static int[] deleteElement(int[] array, int index) {
+        if (index>array.length || index<0){
+            System.out.println("Invalid syntax");
+            return null;}
+        for(int i = index; i<array.length-1;i++) {
+            array[i] = array[i+1];
+        }
+        array[array.length-1] = 0;
+        return array;
+    }
+}
