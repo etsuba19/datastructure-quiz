@@ -1,0 +1,28 @@
+package question1;
+import java.util.Scanner;
+public class searching {
+
+    public static void main(String[] args) {
+        Scanner keyboard = new Scanner(System.in);
+        System.out.println("how many numbers do you want to add?");
+        int size = keyboard.nextInt();
+        int[] array = new int[size];
+        System.out.println("enter the numbers separately: ");
+        for (int i=0; i<size; i++){
+            array[i] = keyboard.nextInt();
+        }
+        System.out.println("enter what you want to find: ");
+        int key = keyboard.nextInt();
+        searching q1 = new searching();
+        System.out.println("the number of times the number was repeated is:");
+        System.out.println(q1.Search(array,key));}
+
+    int Search(int[] array,int key) {
+        int count = 0;
+        for (int i = 0; i<array.length; i++) {
+            if(array[i]==key) count++;
+        }
+        return count;
+    }
+
+}
