@@ -1,0 +1,46 @@
+package question2;
+import java.sql.SQLOutput;
+import java.util.Arrays;
+public class myStack {
+        int top = -1;
+        int size = 5;
+        int[] array = new int[size];
+        public static void main(String[] args){
+            myStack stack = new myStack();
+            stack.push(10);
+            stack.push(21);
+            stack.push(32);
+            System.out.println(Arrays.toString(stack.display()));
+            System.out.println("currently the value of top is "+stack.check());
+            System.out.println("currently the value of peek is "+stack.peek());
+            System.out.println("the popped item is "+stack.pop());
+            System.out.println(Arrays.toString(stack.display()));
+            System.out.println("currently the value of peek is "+stack.peek());
+            System.out.println("currently the value of top is "+stack.check());
+
+
+        }
+        int check() {return top;}
+        void push(int data) {
+            if (isFull()) System.out.println("Sorry you can't push anymore, the stack is full");
+            array[++top] = data;
+        }
+        int peek() {
+            return array[top];
+        }
+        int pop() {
+            if (isEmpty()) System.out.println("Stack is empty, you can pop anything.");
+            int popped = array[top];
+            array[top--] = 0;
+            return popped;
+        }
+        boolean isFull() {
+            return top == size-1;
+        }
+        boolean isEmpty(){
+            return top == -1;
+        }
+        int[] display(){
+            return array;
+        }
+    }
