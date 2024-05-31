@@ -1,0 +1,118 @@
+//clas NODE
+public class NODE {
+    Task ToDo;
+    NODE next;
+
+    NODE(Task ToDo){
+        this.ToDo = ToDo;
+        this.next = null;
+    }
+
+}
+
+//CLASS Task
+public class Task {
+    private String title;
+    private String description;
+    private boolean completed;
+
+    public Task(String title, String description) {
+        this.title = title;
+        this.description = description;
+        this.completed = false;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
+    public void markCompleted() {
+        this.completed = true;
+    }
+}
+
+//CLASS ToDoList
+public class ToDoList {
+    NODE head;
+
+    public void LinkedList(){
+        this.head = null;
+    }
+
+    public void addToDo(Task ToDo){
+        NODE added = new NODE(ToDo);
+        if (head == null) head = added;
+        else{
+            NODE now = head;
+            while(now.next != null){
+                now = now.next;
+            }
+            now.next = added;
+        }
+    }
+
+    public void removeToDo(int Point){
+        if (head == null) System.out.println("list empty");
+        //the above is to check if it is empty
+        NODE temp = head; //stores the reference to the head
+        if (Point == 0) head = temp.next; //if we want to remove the first node
+
+        for(int i=0; temp!=null && i<Point-1; i++){
+            temp = temp.next;
+        }
+        if (temp==null || temp.next==null) System.out.println("not found");
+
+        temp.next = temp.next.next;
+    }
+
+    public void markTodoAsCompleted(String title){
+        NODE now = head;
+        while (now != null) {
+            if (now.ToDo.getTitle().equals(title)) {
+                now.ToDo.markCompleted();
+                return; // Task found and marked as completed
+            }
+            now = now.next;
+        }
+        System.out.println("Task with title '" + title + "' not found.");
+    }
+
+    public void viewToDoList() {
+        NODE now = head;
+        while (now != null) {
+            Task task = now.ToDo;
+            System.out.println("Title: " + task.getTitle());
+            System.out.println("Description: " + task.getDescription());
+            System.out.println("Completed: " + task.isCompleted());
+            System.out.println("-----");
+            now = now.next;
+        }
+    }
+
+    public static void main(String[] args) {
+        // Sample usage
+        ToDoList toDoList = new ToDoList();
+
+        Task task1 = new Task("Buy groceries", "Milk, Bread, Eggs");
+        Task task2 = new Task("Study", "Complete Java assignment");
+
+        toDoList.addToDo(task1);
+        toDoList.addToDo(task2);
+
+        toDoList.viewToDoList();
+
+        toDoList.markTodoAsCompleted("Buy groceries");
+
+        toDoList.viewToDoList();
+    }
+}
+
+//
