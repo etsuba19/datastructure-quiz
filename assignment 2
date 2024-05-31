@@ -1,0 +1,107 @@
+public class NODE {
+    int value;
+    NODE next;
+
+    public NODE(int value) {
+        this.value = value;
+        this.next = null; // By default, the next node is null
+    }
+}
+
+
+//CLASS INSERT
+class Insert {
+    NODE head;
+
+    public void insertAtPos(int position, int data) {
+        if (position < 1)
+            return;
+
+        NODE newNode = new NODE(data);
+
+        if (position == 1) {
+            newNode.next = head;
+            head = newNode;
+            return;
+        }
+
+        NODE now = head;
+        for (int i = 1; now != null && i < position - 1; i++)
+            now = now.next;
+
+        if (now == null)
+            return;
+
+        newNode.next = now.next;
+        now.next = newNode;
+    }
+}
+
+
+//CLASS DELETE
+class Delete {
+    NODE head;
+
+    public void deleteAtPosition(int position) {
+        if (head == null)
+            return;
+
+        NODE temp = head;
+
+        if (position == 1) {
+            head = temp.next;
+            return;
+        }
+
+        for (int i = 1; temp != null && i < position - 1; i++)
+            temp = temp.next;
+
+        if (temp == null || temp.next == null)
+            return;
+
+        temp.next = temp.next.next;
+    }
+
+    public void deleteAfterNode(NODE prevNode) {
+        if (prevNode == null || prevNode.next == null)
+            return;
+
+        prevNode.next = prevNode.next.next;
+    }
+}
+
+
+    
+//CLASS STACK
+import java.util.EmptyStackException;
+
+class Stack {
+    NODE top;
+
+    public void push(int data) {
+        NODE newNode = new NODE(data);
+        newNode.next = top;
+        top = newNode;
+    }
+
+    public int pop() {
+        if (top == null)
+            throw new EmptyStackException();
+
+        int data = top.value;
+        top = top.next;
+        return data;
+    }
+
+    public int peek() {
+        if (top == null)
+            throw new EmptyStackException();
+
+        return top.value;
+    }
+
+    public boolean isEmpty() {
+        return top == null;
+    }
+}
+
